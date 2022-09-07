@@ -1,1 +1,108 @@
-<p>home works!</p>
+<div class="row mx-0 min-vh-100 align-items-center justify-content-center">
+    <section class="col-8 align-items-center justify-content-center">
+        <div class="col-12 py-3">
+            <button mat-button class="rounded-pill" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                <mat-icon class="mr-3">search</mat-icon>Search
+            </button>
+        </div>
+        <!-- table -->
+        <table class="table" *ngIf="city.id">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Temperature min.</th>
+                    <th scope="col">Temperature max.</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{city.name}}, {{city.country}}</td>
+                    <td>{{city.temp_min}} Kelvin</td>
+                    <td>{{city.temp_max}} Kelvin</td>
+                    <td>
+                        <button mat-raised-button accent="primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            More details
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="w-100 d-flex justify-content-center" *ngIf="!city.id">
+            <h1 class="text-muted m-5 text-center">Any city selected</h1>
+        </div>
+        <!-- table -->
+    </section>
+</div>
+
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+    aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+        <button id="closeButton" type="button" class="btn-close" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <p class="row mx-0">
+            <mat-form-field class="example-full-width col-8" appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="Search some city" [(ngModel)]="modelCity" autocomplete="off">
+            </mat-form-field>
+
+            <button mat-button (click)="searchCity(modelCity)" class="col-4">
+                <mat-icon class="mr-3">search</mat-icon> Search
+            </button>
+        </p>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Details of {{city.name}}, {{city.country}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row mx-0">
+                <div class="col-6 border rounded rounded-1 d-flex flex-column p-3 align-items-center justify-content-center">
+                    <span>Humidity.</span>
+                    <div class="d-flex p-2">
+                        <span class="fs-3">{{city.humidity}}</span>
+                        <mat-icon class="text-muted p-1">water_drop</mat-icon>
+                    </div>
+                </div>
+                <div class="col-6 border rounded rounded-1 d-flex flex-column p-3 align-items-center justify-content-center">
+                    <span>Temperature Max.</span>
+                    <div class="d-flex p-2">
+                        <span class="fs-3">{{city.temp_max}}</span>
+                        <small>Kelvin</small>
+                        <div class="text-muted p-1">
+                            <mat-icon>sunny</mat-icon>
+                            <mat-icon class="text-muted">arrow_upward</mat-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 border rounded rounded-1 d-flex flex-column p-3 align-items-center justify-content-center">
+                    <span>Wind Speed</span>
+                    <div class="d-flex p-2 ">
+                        <span class="fs-3">{{city.windSpeed}}</span>
+                        <mat-icon class="text-muted p-1">air</mat-icon>
+                    </div>
+                </div>
+                <div class="col-6 border rounded rounded-1 d-flex p-3 flex-column align-items-center justify-content-center">
+                    <span>Temperature Min.</span>
+                    <div class="d-flex p-2">
+                        <span class="fs-3">{{city.temp_min}} </span>
+                        <small>Kelvin</small>
+                        <div class="text-muted p-1">
+                            <mat-icon>sunny</mat-icon>
+                            <mat-icon>arrow_downward</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
